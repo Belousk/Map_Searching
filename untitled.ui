@@ -23,16 +23,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
-   <property name="geometry">
-    <rect>
-     <x>380</x>
-     <y>450</y>
-     <width>113</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -44,19 +34,6 @@
    </property>
    <property name="text">
     <string>Введите координаты: </string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>450</y>
-     <width>71</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Масштаб : </string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
@@ -71,6 +48,31 @@
    <property name="text">
     <string>Показать</string>
    </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>450</y>
+     <width>191</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Схема</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Спутник</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Гибрид</string>
+    </property>
+   </item>
   </widget>
  </widget>
  <resources/>

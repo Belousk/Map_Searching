@@ -11,6 +11,11 @@ from api_work import get_address_coords, save_image
 
 MAX_MAP_SCALE = 21
 MIN_MAP_SCALE = 0
+MAP_TYPES = {
+    'Схема': 'map',
+    'Спутник': 'sat',
+    'Гибрид': 'sat,skl'
+}
 
 
 class Example(QMainWindow, Ui_Form):
@@ -20,34 +25,37 @@ class Example(QMainWindow, Ui_Form):
         self.initUI()
         self.map_scale = default_scale
         self.coords = [20, 20]
+        self.map = 'Схема'
 
     def set_coords(self):
         self.coords = [float(i) for i in self.lineEdit.text().split(',')]
+        self.map = self.comboBox.currentText()
         self.create_image()
 
     def keyPressEvent(self, event: QtGui.QKeyEvent) -> None:
         if event.key() == Qt.Key_Up:
-            if self.coords[1] - 0.001 > 0:
-                self.coords[1] -= 0.11
-                self.create_image()
-        if event.key() == Qt.Key_Down:
-            if self.coords[1] + 0.001 < 360:
+            if self.coords[1] + 0.001 > 0:
                 self.coords[1] += 0.11
                 self.create_image()
-        if event.key() == Qt.Key_Left:
-            if self.coords[0] + 0.001 < 360:
-                self.coords[0] += 0.11
+        if event.key() == Qt.Key_Down:
+            if self.coords[1] - 0.001 < 360:
+                self.coords[1] -= 0.11
                 self.create_image()
-        if event.key() == Qt.Key_Right:
+        if event.key() == Qt.Key_Left:
             if self.coords[0] - 0.001 < 360:
                 self.coords[0] -= 0.11
+                self.create_image()
+        if event.key() == Qt.Key_Right:
+            if self.coords[0] + 0.001 < 360:
+                self.coords[0] += 0.11
                 self.create_image()
 
     def mousePressEvent(self, a0: QtGui.QMouseEvent) -> None:
         self.setFocus()
 
     def create_image(self):
-        save_image(self.coords, self.map_scale, 'map.jpg')
+
+        save_image(self.coords, self.map_scale, 'map.jpg', MAP_TYPES[self.map])
         self.pixmap = QPixmap('map.jpg')
         self.image.setPixmap(self.pixmap)
         # self.lineEdit.hide()

@@ -20,10 +20,10 @@ def get_address_coords(address: str) -> List[int]:
     return [int(coords_str[0]), int(coords_str[1])]
 
 
-def save_image(coords: (int, int), z: int, filename: str):
+def save_image(coords: (int, int), z: int, filename: str, map_type: str):
 
     map_params = {
-        "l": "map",
+        "l": map_type,
         "ll": f'{coords[0]},{coords[1]}',
         "z": z
     }
