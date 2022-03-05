@@ -1,4 +1,5 @@
 import sys
+from typing import List, Tuple, Optional
 
 from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtCore import Qt
@@ -8,6 +9,8 @@ from ui_file import Ui_Form
 from api_work import get_address_coords, save_image
 
 # test coords(39.741917,54.629565)(37.622513,55.75322)
+# test address Казань, Бакалейная, 41
+
 
 MAX_MAP_SCALE = 21
 MIN_MAP_SCALE = 0
@@ -24,30 +27,32 @@ class Example(QMainWindow, Ui_Form):
         self.setupUi(self)
         self.initUI()
         self.map_scale = default_scale
-        self.coords = [20, 20]
+        self.map_coords: List[float] = [20, 20]
+        self.address_pos: Optional[Tuple[float, float]] = None
         self.map = 'Схема'
 
     def set_coords(self):
-        self.coords = [float(i) for i in self.lineEdit.text().split(',')]
+        self.address_pos = get_address_coords(self.lineEdit.text())
+        self.map_coords = [self.address_pos[0], self.address_pos[1]]
         self.map = self.comboBox.currentText()
         self.create_image()
 
     def keyPressEvent(self, event: QtGui.QKeyEvent) -> None:
         if event.key() == Qt.Key_Up:
-            if self.coords[1] + 0.001 > 0:
-                self.coords[1] += 0.11
+            if self.map_coords[1] + 0.001 > 0:
+                self.map_coords[1] += 0.11
                 self.create_image()
         if event.key() == Qt.Key_Down:
-            if self.coords[1] - 0.001 < 360:
-                self.coords[1] -= 0.11
+            if self.map_coords[1] - 0.001 < 360:
+                self.map_coords[1] -= 0.11
                 self.create_image()
         if event.key() == Qt.Key_Left:
-            if self.coords[0] - 0.001 < 360:
-                self.coords[0] -= 0.11
+            if self.map_coords[0] - 0.001 < 360:
+                self.map_coords[0] -= 0.11
                 self.create_image()
         if event.key() == Qt.Key_Right:
-            if self.coords[0] + 0.001 < 360:
-                self.coords[0] += 0.11
+            if self.map_coords[0] + 0.001 < 360:
+                self.map_coords[0] += 0.11
                 self.create_image()
 
     def mousePressEvent(self, a0: QtGui.QMouseEvent) -> None:
@@ -55,11 +60,9 @@ class Example(QMainWindow, Ui_Form):
 
     def create_image(self):
 
-        save_image(self.coords, self.map_scale, 'map.jpg', MAP_TYPES[self.map])
+        save_image(self.map_coords, self.map_scale, 'map.jpg', MAP_TYPES[self.map], self.address_pos)
         self.pixmap = QPixmap('map.jpg')
         self.image.setPixmap(self.pixmap)
-        # self.lineEdit.hide()
-        # self.pushButton.hide()
 
     def initUI(self):
         self.pushButton.clicked.connect(self.set_coords)

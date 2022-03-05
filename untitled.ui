@@ -33,7 +33,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Введите координаты: </string>
+    <string>Введите адрес: </string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">

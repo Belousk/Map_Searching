@@ -37,7 +37,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "Введите координаты: "))
+        self.label.setText(_translate("Form", "Введите адрес: "))
         self.pushButton.setText(_translate("Form", "Показать"))
         self.comboBox.setItemText(0, _translate("Form", "Схема"))
         self.comboBox.setItemText(1, _translate("Form", "Спутник"))
