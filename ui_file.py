@@ -30,6 +30,9 @@ class Ui_Form(object):
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
+        self.pushButton_2 = QtWidgets.QPushButton(Form)
+        self.pushButton_2.setGeometry(QtCore.QRect(460, 480, 221, 25))
+        self.pushButton_2.setObjectName("pushButton_2")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -42,3 +45,4 @@ class Ui_Form(object):
         self.comboBox.setItemText(0, _translate("Form", "Схема"))
         self.comboBox.setItemText(1, _translate("Form", "Спутник"))
         self.comboBox.setItemText(2, _translate("Form", "Гибрид"))
+        self.pushButton_2.setText(_translate("Form", "Сброс поискового результата"))

@@ -64,8 +64,13 @@ class Example(QMainWindow, Ui_Form):
         self.pixmap = QPixmap('map.jpg')
         self.image.setPixmap(self.pixmap)
 
+    def clear_map_tag(self):
+        self.address_pos = None
+        self.create_image()
+
     def initUI(self):
         self.pushButton.clicked.connect(self.set_coords)
+        self.pushButton_2.clicked.connect(self.clear_map_tag)
         self.image = QLabel(self)
         self.image.move(10, 10)
         self.image.resize(650, 400)
