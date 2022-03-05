@@ -30,10 +30,15 @@ class Example(QMainWindow, Ui_Form):
         self.map_coords: List[float] = [20, 20]
         self.address_pos: Optional[Tuple[float, float]] = None
         self.address: Optional[str] = None
+        self.postal_code: Optional[str] = None
         self.map = 'Схема'
 
     def set_coords(self):
         self.address_pos = get_address_coords(self.lineEdit.text())
+        if self.checkBox.isChecked():
+            self.label_3.setText(self.address_pos[3])
+        else:
+            self.label_3.setText('')
         self.address = self.address_pos[2]
         self.map_coords = [self.address_pos[0], self.address_pos[1]]
         self.map = self.comboBox.currentText()
@@ -74,6 +79,7 @@ class Example(QMainWindow, Ui_Form):
     def initUI(self):
         self.pushButton.clicked.connect(self.set_coords)
         self.pushButton_2.clicked.connect(self.clear_map_tag)
+        self.checkBox.clicked.connect(self.set_coords)
         self.image = QLabel(self)
         self.image.move(10, 10)
         self.image.resize(650, 400)

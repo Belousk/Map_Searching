@@ -9,7 +9,7 @@ MAP_API_SERVER = "https://static-maps.yandex.ru/1.x/"
 GEOCODER_API_KEY = "40d1649f-0493-4b70-98ba-98533de7710b"
 
 
-def get_address_coords(address: str) -> Tuple[float, float, str]:
+def get_address_coords(address: str) -> Tuple[float, float, str, str]:
     geocoder_params = {
         "apikey": GEOCODER_API_KEY,
         "geocode": address,
@@ -21,8 +21,10 @@ def get_address_coords(address: str) -> Tuple[float, float, str]:
 
     components = toponym["metaDataProperty"]["GeocoderMetaData"]['Address']['Components']
     address = ', '.join([i['name'] for i in components])
+    pprint.pprint(toponym)
     coords_str = toponym["Point"]["pos"].split(' ')
-    return float(coords_str[0]), float(coords_str[1]), address
+    postal_code = toponym["metaDataProperty"]["GeocoderMetaData"]['Address']["postal_code"]
+    return float(coords_str[0]), float(coords_str[1]), address, postal_code
 
 
 def save_image(coords: List[float], z: int, filename: str, map_type: str, address_pos: Tuple[float, float]) -> None:
