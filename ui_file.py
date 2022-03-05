@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(696, 513)
+        Form.resize(696, 557)
         self.lineEdit = QtWidgets.QLineEdit(Form)
         self.lineEdit.setGeometry(QtCore.QRect(170, 450, 113, 25))
         self.lineEdit.setObjectName("lineEdit")
@@ -22,7 +22,7 @@ class Ui_Form(object):
         self.label.setGeometry(QtCore.QRect(10, 450, 161, 21))
         self.label.setObjectName("label")
         self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setGeometry(QtCore.QRect(540, 450, 83, 25))
+        self.pushButton.setGeometry(QtCore.QRect(530, 450, 83, 25))
         self.pushButton.setObjectName("pushButton")
         self.comboBox = QtWidgets.QComboBox(Form)
         self.comboBox.setGeometry(QtCore.QRect(310, 450, 191, 25))
@@ -31,8 +31,12 @@ class Ui_Form(object):
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.pushButton_2 = QtWidgets.QPushButton(Form)
-        self.pushButton_2.setGeometry(QtCore.QRect(460, 480, 221, 25))
+        self.pushButton_2.setGeometry(QtCore.QRect(190, 520, 221, 25))
         self.pushButton_2.setObjectName("pushButton_2")
+        self.label_2 = QtWidgets.QLabel(Form)
+        self.label_2.setGeometry(QtCore.QRect(20, 490, 631, 31))
+        self.label_2.setText("")
+        self.label_2.setObjectName("label_2")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)

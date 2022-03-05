@@ -29,10 +29,12 @@ class Example(QMainWindow, Ui_Form):
         self.map_scale = default_scale
         self.map_coords: List[float] = [20, 20]
         self.address_pos: Optional[Tuple[float, float]] = None
+        self.address: Optional[str] = None
         self.map = 'Схема'
 
     def set_coords(self):
         self.address_pos = get_address_coords(self.lineEdit.text())
+        self.address = self.address_pos[2]
         self.map_coords = [self.address_pos[0], self.address_pos[1]]
         self.map = self.comboBox.currentText()
         self.create_image()
@@ -59,13 +61,14 @@ class Example(QMainWindow, Ui_Form):
         self.setFocus()
 
     def create_image(self):
-
+        self.label_2.setText(self.address)
         save_image(self.map_coords, self.map_scale, 'map.jpg', MAP_TYPES[self.map], self.address_pos)
         self.pixmap = QPixmap('map.jpg')
         self.image.setPixmap(self.pixmap)
 
     def clear_map_tag(self):
         self.address_pos = None
+        self.address = None
         self.create_image()
 
     def initUI(self):
